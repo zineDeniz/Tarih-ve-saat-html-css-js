@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clock</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000;
+      color: #0ff;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .clock {
+      text-align: center;
+    }
+
+    #date {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    #time {
+      font-size: 48px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <p id="date"></p>
+    <p id="time"></p>
+  </div>
+
+  <script>
+    const WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+    function updateTime() {
+      var now = new Date();
+
+      // Saat ve dakika bilgisi
+      document.getElementById("time").innerText =
+        zeroPadding(now.getHours(), 2) + ":" +
+        zeroPadding(now.getMinutes(), 2) + ":" +
+        zeroPadding(now.getSeconds(), 2);
+
+      // Tarih bilgisi
+      document.getElementById("date").innerText =
+        now.getFullYear() + "-" +
+        zeroPadding(now.getMonth() + 1, 2) + "-" +
+        zeroPadding(now.getDate(), 2) + " " +
+        WEEK[now.getDay()];
+    }
+
+    // Sayıyı sıfırla doldurma fonksiyonu
+    function zeroPadding(num, digit) {
+      return String(num).padStart(digit, '0');
+    }
+
+    // Zamanı sürekli güncelle
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
